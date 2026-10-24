@@ -24,36 +24,19 @@
     line-height: 1.7;
   }
 
-  /* ===== پس‌زمینه انیمیشنی ===== */
-  .bg-anim {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    background: #0a0a0a;
-    overflow: hidden;
-  }
+  .bg-anim { position: fixed; inset: 0; z-index: -2; background: #0a0a0a; overflow: hidden; }
   .bg-anim::before {
-    content: '';
-    position: absolute;
-    width: 600px; height: 600px;
-    border-radius: 50%;
+    content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%;
     background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%);
-    top: -200px; left: -150px;
-    animation: float1 18s ease-in-out infinite;
+    top: -200px; left: -150px; animation: float1 18s ease-in-out infinite;
   }
   .bg-anim::after {
-    content: '';
-    position: absolute;
-    width: 500px; height: 500px;
-    border-radius: 50%;
+    content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%;
     background: radial-gradient(circle, rgba(255,255,255,0.07), transparent 70%);
-    bottom: -150px; right: -100px;
-    animation: float2 22s ease-in-out infinite;
+    bottom: -150px; right: -100px; animation: float2 22s ease-in-out infinite;
   }
   .bg-grid {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
+    position: fixed; inset: 0; z-index: -1;
     background-image:
       linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
@@ -61,374 +44,429 @@
     mask-image: radial-gradient(circle at 50% 30%, #000 20%, transparent 75%);
     -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 20%, transparent 75%);
   }
+  @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(120px,80px) scale(1.2);} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-100px,-60px) scale(1.15);} }
 
-  @keyframes float1 {
-    0%,100% { transform: translate(0,0) scale(1); }
-    50% { transform: translate(120px, 80px) scale(1.2); }
-  }
-  @keyframes float2 {
-    0%,100% { transform: translate(0,0) scale(1); }
-    50% { transform: translate(-100px, -60px) scale(1.15); }
-  }
-
-  /* ===== ذرات شناور ===== */
-  .particles {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-  }
+  .particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
   .particle {
-    position: absolute;
-    width: 3px; height: 3px;
-    background: #fff;
-    border-radius: 50%;
-    opacity: 0;
-    animation: rise linear infinite;
+    position: absolute; width: 3px; height: 3px; background: #fff; border-radius: 50%;
+    opacity: 0; animation: rise linear infinite;
   }
   @keyframes rise {
     0% { opacity: 0; transform: translateY(0) scale(0.5); }
-    10% { opacity: .8; }
-    90% { opacity: .6; }
+    10% { opacity: .8; } 90% { opacity: .6; }
     100% { opacity: 0; transform: translateY(-100vh) scale(1.2); }
   }
 
-  /* ===== Header ===== */
   header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 6%;
-    background: rgba(10,10,10,0.7);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 6%; background: rgba(10,10,10,0.7); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.08); z-index: 100;
     animation: slideDown .8s ease;
   }
-  @keyframes slideDown {
-    from { transform: translateY(-100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+  @keyframes slideDown { from{transform:translateY(-100%);opacity:0;} to{transform:translateY(0);opacity:1;} }
 
   .logo {
-    font-size: 1.6rem;
-    font-weight: 900;
-    letter-spacing: 2px;
+    font-size: 1.6rem; font-weight: 900; letter-spacing: 2px;
     background: linear-gradient(90deg, #fff, #888, #fff);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 4s linear infinite;
+    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; animation: shine 4s linear infinite;
   }
-  @keyframes shine {
-    to { background-position: 200% center; }
-  }
+  @keyframes shine { to { background-position: 200% center; } }
 
   nav a {
-    color: #ccc;
-    text-decoration: none;
-    margin: 0 14px;
-    font-weight: 400;
-    font-size: 0.95rem;
-    position: relative;
-    transition: color .3s;
+    color: #ccc; text-decoration: none; margin: 0 14px; font-weight: 400;
+    font-size: 0.95rem; position: relative; transition: color .3s;
   }
   nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px; right: 0;
-    width: 0; height: 2px;
-    background: #fff;
-    transition: width .3s;
+    content: ''; position: absolute; bottom: -5px; right: 0;
+    width: 0; height: 2px; background: #fff; transition: width .3s;
   }
   nav a:hover { color: #fff; }
   nav a:hover::after { width: 100%; }
 
-  /* ===== Hero ===== */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 120px 6% 80px;
-    position: relative;
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; padding: 120px 6% 80px; position: relative;
   }
-
   .hero h1 {
-    font-size: clamp(2.4rem, 8vw, 5.5rem);
-    font-weight: 900;
-    letter-spacing: 4px;
+    font-size: clamp(2.4rem, 8vw, 5.5rem); font-weight: 900; letter-spacing: 4px;
     margin-bottom: 18px;
     background: linear-gradient(120deg, #ffffff 0%, #b0b0b0 40%, #ffffff 60%, #9a9a9a 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
+    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 5s linear infinite, fadeUp 1s ease .2s both;
     filter: drop-shadow(0 0 30px rgba(255,255,255,0.25));
   }
-
   .hero p {
-    color: #aaa;
-    max-width: 600px;
-    font-size: 1.1rem;
-    margin-bottom: 36px;
+    color: #aaa; max-width: 600px; font-size: 1.1rem; margin-bottom: 36px;
     animation: fadeUp 1s ease .5s both;
   }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* آی‌پی با افکت */
   .ip-box {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(26,26,26,0.8);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 50px;
-    padding: 14px 24px;
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all .3s;
-    direction: ltr;
-    position: relative;
-    overflow: hidden;
-    animation: fadeUp 1s ease .8s both;
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(26,26,26,0.8); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px; padding: 14px 24px; font-size: 1.15rem; font-weight: 700;
+    letter-spacing: 1px; cursor: pointer; transition: all .3s; direction: ltr;
+    position: relative; overflow: hidden; animation: fadeUp 1s ease .8s both;
   }
   .ip-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     transition: left .6s;
   }
   .ip-box:hover::before { left: 100%; }
   .ip-box:hover {
-    background: #fff;
-    color: #000;
-    transform: translateY(-3px) scale(1.03);
+    background: #fff; color: #000; transform: translateY(-3px) scale(1.03);
     box-shadow: 0 10px 40px rgba(255,255,255,0.2);
   }
   .ip-box .copy-icon { font-size: 0.9rem; opacity: .7; }
 
-  /* وضعیت */
   .status-bar {
-    display: flex;
-    gap: 28px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
-    animation: fadeUp 1s ease 1.1s both;
+    display: flex; gap: 28px; margin-top: 40px; flex-wrap: wrap;
+    justify-content: center; animation: fadeUp 1s ease 1.1s both;
   }
   .status-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.95rem;
-    color: #bbb;
+    display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: #bbb;
+  }
+  .status-item.clickable {
+    cursor: pointer; padding: 8px 16px; border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(26,26,26,0.6);
+    transition: all .3s;
+  }
+  .status-item.clickable:hover {
+    background: #fff; color: #000; transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,255,255,0.15);
   }
   .dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: #2ecc71;
-    box-shadow: 0 0 12px #2ecc71;
-    animation: pulse 1.6s infinite;
+    width: 10px; height: 10px; border-radius: 50%; background: #2ecc71;
+    box-shadow: 0 0 12px #2ecc71; animation: pulse 1.6s infinite;
   }
   .dot.off { background: #e74c3c; box-shadow: 0 0 12px #e74c3c; animation: none; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(1.3);} }
 
-  @keyframes pulse {
-    0%,100% { opacity: 1; transform: scale(1); }
-    50% { opacity: .4; transform: scale(1.3); }
-  }
+  .reveal { opacity: 0; transform: translateY(50px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.show { opacity: 1; transform: translateY(0); }
 
-  /* ===== اسکرول انیمیشن ===== */
-  .reveal {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity .8s ease, transform .8s ease;
-  }
-  .reveal.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ===== Sections ===== */
   section { padding: 90px 6%; position: relative; }
-
   .section-title {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 12px;
+    text-align: center; font-size: 2rem; font-weight: 900; margin-bottom: 12px;
     letter-spacing: 1px;
     background: linear-gradient(90deg, #fff, #999, #fff);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 4s linear infinite;
+    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; animation: shine 4s linear infinite;
   }
-  .section-sub {
-    text-align: center;
-    color: #777;
-    margin-bottom: 50px;
-    font-size: 0.95rem;
+  .section-sub { text-align: center; color: #777; margin-bottom: 50px; font-size: 0.95rem; }
+
+  .modes {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; max-width: 1000px; margin: 0 auto;
+  }
+  .mode-card {
+    background: linear-gradient(160deg, rgba(30,30,30,0.95), rgba(15,15,15,0.95));
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 18px;
+    padding: 40px 28px; text-align: center;
+    transition: all .4s cubic-bezier(.2,.8,.2,1); position: relative; overflow: hidden;
+  }
+  .mode-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: 18px; padding: 1px;
+    background: linear-gradient(135deg, #fff, transparent, #fff);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity: 0; transition: opacity .4s;
+  }
+  .mode-card:hover::before { opacity: .5; }
+  .mode-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(0,0,0,0.7); }
+  .mode-card .icon { font-size: 3rem; margin-bottom: 16px; transition: transform .4s; }
+  .mode-card:hover .icon { transform: scale(1.15) rotate(-5deg); }
+  .mode-card h3 { font-size: 1.4rem; margin-bottom: 10px; }
+  .mode-card p { color: #999; font-size: 0.95rem; }
+  .mode-card.soon { opacity: .6; border-style: dashed; }
+  .badge {
+    display: inline-block; margin-top: 14px; font-size: 0.75rem; font-weight: 700;
+    padding: 5px 14px; border-radius: 50px; background: rgba(255,255,255,0.1);
+    color: #fff; letter-spacing: 1px; animation: badgePulse 2s infinite;
+  }
+  @keyframes badgePulse {
+    0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0.2);}
+    50%{box-shadow:0 0 0 8px rgba(255,255,255,0);}
   }
 
-  /* ===== گیم‌مودها ===== */
-  .modes {
+  .players-box {
+    max-width: 800px; margin: 0 auto;
+    background: linear-gradient(160deg, rgba(26,26,26,0.95), rgba(15,15,15,0.95));
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 30px;
+  }
+  .players-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 22px; padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .players-header h3 { font-size: 1.1rem; }
+  .players-header .count { font-size: 0.9rem; color: #aaa; }
+
+  .view-players-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 16px; margin-top: 16px;
+    background: linear-gradient(135deg, #fff, #d0d0d0);
+    color: #000; border: none; border-radius: 12px;
+    font-family: inherit; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: all .3s;
+    position: relative; overflow: hidden;
+  }
+  .view-players-btn::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.15), transparent);
+    transition: left .6s;
+  }
+  .view-players-btn:hover::before { left: 100%; }
+  .view-players-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(255,255,255,0.3); }
+  .view-players-btn:active { transform: translateY(-1px); }
+
+  .player-preview { display: flex; flex-wrap: wrap; gap: 10px; }
+  .player-tag {
+    display: flex; align-items: center; gap: 8px;
+    background: #0f0f0f; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px; padding: 8px 16px; font-size: 0.9rem;
+    color: #ddd; direction: ltr; transition: all .3s;
+    animation: popIn .4s ease both;
+  }
+  .player-tag:hover { background: #fff; color: #000; transform: translateY(-2px); }
+  @keyframes popIn { from{opacity:0;transform:scale(.7);} to{opacity:1;transform:scale(1);} }
+  .player-tag .avatar { width: 22px; height: 22px; border-radius: 4px; background: #fff; }
+  .loading { color: #777; font-size: 0.95rem; }
+
+  /* ===== تیم / سازندگان ===== */
+  .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    max-width: 1000px;
+    gap: 28px;
+    max-width: 900px;
     margin: 0 auto;
   }
 
-  .mode-card {
+  .team-card {
+    position: relative;
     background: linear-gradient(160deg, rgba(30,30,30,0.95), rgba(15,15,15,0.95));
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
-    padding: 40px 28px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 22px;
+    padding: 40px 26px 32px;
     text-align: center;
     transition: all .4s cubic-bezier(.2,.8,.2,1);
-    position: relative;
     overflow: hidden;
   }
-  .mode-card::before {
+  .team-card::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 18px;
-    padding: 1px;
-    background: linear-gradient(135deg, #fff, transparent, #fff);
+    border-radius: 22px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, #fff, transparent 40%, transparent 60%, #fff);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
     transition: opacity .4s;
   }
-  .mode-card:hover::before { opacity: .5; }
-  .mode-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+  .team-card:hover::before { opacity: .7; }
+  .team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.8), 0 0 50px rgba(255,255,255,0.08);
   }
-  .mode-card .icon {
-    font-size: 3rem;
-    margin-bottom: 16px;
-    transition: transform .4s;
-  }
-  .mode-card:hover .icon { transform: scale(1.15) rotate(-5deg); }
-  .mode-card h3 { font-size: 1.4rem; margin-bottom: 10px; }
-  .mode-card p { color: #999; font-size: 0.95rem; }
 
-  .mode-card.soon {
-    opacity: .6;
-    border-style: dashed;
+  /* هاله پشت آواتار */
+  .team-avatar-wrap {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    margin: 0 auto 22px;
   }
-  .badge {
+  .team-avatar-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #fff, transparent, #fff, transparent, #fff);
+    opacity: .15;
+    animation: rotateGlow 6s linear infinite;
+    filter: blur(4px);
+  }
+  @keyframes rotateGlow { to { transform: rotate(360deg); } }
+
+  .team-avatar {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.25);
+    background: #222;
+    transition: all .4s;
+    image-rendering: pixelated;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  .team-card:hover .team-avatar {
+    border-color: #fff;
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 0 15px 45px rgba(255,255,255,0.25);
+  }
+
+  .team-role {
     display: inline-block;
-    margin-top: 14px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 5px 14px;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    padding: 5px 16px;
     border-radius: 50px;
     background: rgba(255,255,255,0.1);
     color: #fff;
-    letter-spacing: 1px;
-    animation: badgePulse 2s infinite;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.15);
   }
-  @keyframes badgePulse {
-    0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
-    50% { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
-  }
-
-  /* ===== پلیرها ===== */
-  .players-box {
-    max-width: 800px;
-    margin: 0 auto;
-    background: linear-gradient(160deg, rgba(26,26,26,0.95), rgba(15,15,15,0.95));
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
-    padding: 30px;
-  }
-  .players-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 22px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .players-header h3 { font-size: 1.1rem; }
-  .players-header .count { font-size: 0.9rem; color: #aaa; }
-  .player-list { display: flex; flex-wrap: wrap; gap: 10px; }
-  .player-tag {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #0f0f0f;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 50px;
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    color: #ddd;
-    direction: ltr;
-    transition: all .3s;
-    animation: popIn .4s ease both;
-  }
-  .player-tag:hover {
-    background: #fff;
+  .team-card.owner .team-role {
+    background: linear-gradient(135deg, #fff, #c0c0c0);
     color: #000;
-    transform: translateY(-2px);
+    border-color: transparent;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
   }
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(.7); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .player-tag .avatar {
-    width: 22px; height: 22px;
-    border-radius: 4px;
-    background: #fff;
-  }
-  .loading { color: #777; font-size: 0.95rem; }
 
-  /* ===== فوتر ===== */
-  footer {
-    text-align: center;
-    padding: 40px 6%;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    color: #666;
-    font-size: 0.85rem;
-  }
-  footer strong {
-    background: linear-gradient(90deg, #fff, #888, #fff);
+  .team-name {
+    font-size: 1.35rem;
+    font-weight: 900;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    direction: ltr;
+    background: linear-gradient(90deg, #fff, #aaa, #fff);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shine 3s linear infinite;
+    animation: shine 4s linear infinite;
+  }
+
+  .team-desc {
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 6px;
+  }
+
+  /* ===== مودال ===== */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px); z-index: 999;
+    display: flex; justify-content: center; align-items: center;
+    padding: 20px; opacity: 0; visibility: hidden;
+    transition: opacity .35s ease, visibility .35s ease;
+  }
+  .modal-overlay.active { opacity: 1; visibility: visible; }
+  .modal {
+    background: linear-gradient(160deg, #1c1c1c, #0d0d0d);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 22px; padding: 30px;
+    width: 100%; max-width: 620px; max-height: 85vh;
+    display: flex; flex-direction: column;
+    transform: scale(0.85) translateY(30px);
+    transition: transform .35s cubic-bezier(.2,.8,.2,1);
+    box-shadow: 0 30px 100px rgba(0,0,0,0.9);
+  }
+  .modal-overlay.active .modal { transform: scale(1) translateY(0); }
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 18px; margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .modal-header h2 {
+    font-size: 1.3rem; font-weight: 900;
+    background: linear-gradient(90deg, #fff, #999, #fff);
+    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; animation: shine 3s linear infinite;
+  }
+  .modal-close {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+    color: #fff; width: 38px; height: 38px; border-radius: 50%;
+    font-size: 1.2rem; cursor: pointer; display: flex;
+    align-items: center; justify-content: center; transition: all .25s;
+  }
+  .modal-close:hover { background: #fff; color: #000; transform: rotate(90deg); }
+  .modal-body {
+    overflow-y: auto; padding-right: 6px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .modal-body::-webkit-scrollbar { width: 6px; }
+  .modal-body::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+  .modal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 10px; }
+  .modal-body::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.45); }
+
+  .player-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    transition: all .25s;
+    animation: slideInRow .4s ease both;
+  }
+  @keyframes slideInRow {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .player-row:hover {
+    background: #fff; color: #000;
+    transform: translateX(-5px);
+    border-color: #fff;
+  }
+  .player-row .avatar-lg {
+    width: 42px; height: 42px; border-radius: 8px;
+    background: #fff; flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .player-row .name {
+    font-weight: 700; font-size: 1rem;
+    direction: ltr; text-align: left; flex: 1;
+  }
+  .player-row .rank-badge {
+    font-size: 0.7rem; padding: 3px 10px; border-radius: 50px;
+    background: rgba(255,255,255,0.12); color: #ddd;
+    font-weight: 700; letter-spacing: .5px;
+  }
+  .player-row:hover .rank-badge { background: rgba(0,0,0,0.15); color: #000; }
+  .player-row .online-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #2ecc71; box-shadow: 0 0 8px #2ecc71;
+    flex-shrink: 0;
+    animation: pulse 1.6s infinite;
+  }
+  .modal-empty { text-align: center; padding: 40px 20px; color: #777; }
+  .modal-empty .emoji { font-size: 3rem; margin-bottom: 12px; opacity: .6; }
+
+  footer {
+    text-align: center; padding: 40px 6%;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: #666; font-size: 0.85rem;
+  }
+  footer strong {
+    background: linear-gradient(90deg, #fff, #888, #fff);
+    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; animation: shine 3s linear infinite;
   }
 
   @media (max-width: 600px) {
     nav a { margin: 0 8px; font-size: 0.85rem; }
     .logo { font-size: 1.3rem; }
+    .modal { padding: 20px; }
+    .modal-header h2 { font-size: 1.1rem; }
+    .player-row .avatar-lg { width: 36px; height: 36px; }
+    .player-row .name { font-size: 0.9rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- پس‌زمینه انیمیشنی -->
 <div class="bg-anim"></div>
 <div class="bg-grid"></div>
 <div class="particles" id="particles"></div>
@@ -438,11 +476,11 @@
   <nav>
     <a href="#modes">گیم‌مودها</a>
     <a href="#players">پلیرها</a>
+    <a href="#team">تیم</a>
     <a href="#connect">اتصال</a>
   </nav>
 </header>
 
-<!-- Hero -->
 <div class="hero">
   <h1>AYSHINEV</h1>
   <p>سرور ماینکرفت فارسی — دنیایی تازه برای ساختن، ماجراجویی و رقابت</p>
@@ -457,7 +495,7 @@
       <span class="dot" id="statusDot"></span>
       <span id="statusText">در حال بررسی وضعیت...</span>
     </div>
-    <div class="status-item">
+    <div class="status-item clickable" onclick="openPlayerModal()" title="برای دیدن لیست کامل کلیک کنید">
       <span>👥</span>
       <span id="playerCount">— پلیر آنلاین</span>
     </div>
@@ -475,7 +513,6 @@
       <h3>Survival</h3>
       <p>سروایول کلاسیک با اقتصادی پویا، محافظت از زمین و گیم‌پلی متعادل</p>
     </div>
-
     <div class="mode-card soon reveal">
       <div class="icon">🎮</div>
       <h3>Mini Games</h3>
@@ -488,15 +525,55 @@
 <!-- پلیرها -->
 <section id="players">
   <h2 class="section-title reveal">پلیرهای آنلاین</h2>
-  <p class="section-sub reveal">لیست بازیکنان متصل به سرور</p>
+  <p class="section-sub reveal">برای دیدن لیست کامل کلیک کنید</p>
 
   <div class="players-box reveal">
     <div class="players-header">
-      <h3>👥 لیست پلیرها</h3>
+      <h3>👥 پیش‌نمایش پلیرها</h3>
       <span class="count" id="playerTotal">—</span>
     </div>
-    <div class="player-list" id="playerList">
+    <div class="player-preview" id="playerPreview">
       <span class="loading">در حال دریافت لیست پلیرها...</span>
+    </div>
+    <button class="view-players-btn" onclick="openPlayerModal()">
+      <span>👁️</span>
+      <span>مشاهده لیست کامل پلیرها</span>
+    </button>
+  </div>
+</section>
+
+<!-- تیم / سازندگان -->
+<section id="team">
+  <h2 class="section-title reveal">تیم AyShinEV</h2>
+  <p class="section-sub reveal">افرادی که این سرور رو می‌سازن</p>
+
+  <div class="team-grid">
+    <!-- Owner -->
+    <div class="team-card owner reveal">
+      <div class="team-avatar-wrap">
+        <img class="team-avatar"
+             src="https://raw.githubusercontent.com/AghaBanafshi-2/Reponew/refs/heads/main/head-owner.png"
+             alt="AyshinEV"
+             width="128" height="128"
+             onerror="this.src='https://mc-heads.net/avatar/MHF_Steve/128'">
+      </div>
+      <span class="team-role">Owner</span>
+      <div class="team-name">AyshinEV</div>
+      <div class="team-desc">مؤسس و مدیر کل سرور</div>
+    </div>
+
+    <!-- Developer -->
+    <div class="team-card reveal">
+      <div class="team-avatar-wrap">
+        <img class="team-avatar"
+             src="https://raw.githubusercontent.com/AghaBanafshi-2/Reponew/refs/heads/main/dev-head.png"
+             alt="TheAghaBanafshii"
+             width="128" height="128"
+             onerror="this.src='https://mc-heads.net/avatar/MHF_Steve/128'">
+      </div>
+      <span class="team-role">Developer</span>
+      <div class="team-name">TheAghaBanafshii</div>
+      <div class="team-desc">توسعه‌دهنده و برنامه‌نویس سرور</div>
     </div>
   </div>
 </section>
@@ -517,10 +594,26 @@
   ساخته شده برای سرور <strong>AyShinEV</strong> — تمامی حقوق محفوظ است
 </footer>
 
+<!-- مودال -->
+<div class="modal-overlay" id="playerModal" onclick="closePlayerModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h2>👥 لیست پلیرهای آنلاین</h2>
+      <button class="modal-close" onclick="closePlayerModal()" title="بستن">✕</button>
+    </div>
+    <div class="modal-body" id="modalPlayerList">
+      <div class="modal-empty">
+        <div class="emoji">⏳</div>
+        <div>در حال بارگذاری...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   const SERVER_IP = "ayshinev.new.tg";
+  let currentPlayers = [];
 
-  /* ===== ذرات شناور ===== */
   const particlesEl = document.getElementById('particles');
   for (let i = 0; i < 25; i++) {
     const p = document.createElement('div');
@@ -533,7 +626,6 @@
     particlesEl.appendChild(p);
   }
 
-  /* ===== کپی آی‌پی ===== */
   function copyIP() {
     navigator.clipboard.writeText(SERVER_IP).then(() => {
       const icon = document.getElementById('copyIcon');
@@ -541,16 +633,53 @@
     });
   }
 
-  /* ===== اسکرول انیمیشن ===== */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('show');
     });
   }, { threshold: 0.15 });
-
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  /* ===== وضعیت سرور ===== */
+  function openPlayerModal() {
+    document.getElementById('playerModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    renderModalPlayers();
+  }
+
+  function closePlayerModal(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.getElementById('playerModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePlayerModal();
+  });
+
+  function renderModalPlayers() {
+    const container = document.getElementById('modalPlayerList');
+    if (currentPlayers.length === 0) {
+      container.innerHTML = `
+        <div class="modal-empty">
+          <div class="emoji">😴</div>
+          <div>در حال حاضر هیچ پلیری آنلاین نیست</div>
+        </div>
+      `;
+      return;
+    }
+    container.innerHTML = currentPlayers.map((name, i) => `
+      <div class="player-row" style="animation-delay:${i * 0.04}s">
+        <img class="avatar-lg"
+             src="https://mc-heads.net/avatar/${name}/42"
+             alt="${name}"
+             onerror="this.src='https://mc-heads.net/avatar/MHF_Steve/42'">
+        <span class="name">${name}</span>
+        <span class="rank-badge">PLAYER</span>
+        <span class="online-dot"></span>
+      </div>
+    `).join('');
+  }
+
   async function fetchStatus() {
     try {
       const res = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
@@ -560,7 +689,7 @@
       const statusText = document.getElementById('statusText');
       const playerCount = document.getElementById('playerCount');
       const playerTotal = document.getElementById('playerTotal');
-      const playerList = document.getElementById('playerList');
+      const playerPreview = document.getElementById('playerPreview');
 
       if (data.online) {
         dot.classList.remove('off');
@@ -570,29 +699,42 @@
         playerCount.textContent = `${online} پلیر آنلاین`;
         playerTotal.textContent = `${online} / ${max}`;
 
-        if (data.players?.list && data.players.list.length > 0) {
-          playerList.innerHTML = data.players.list.map((name, i) => `
+        currentPlayers = (data.players?.list || []).map(p =>
+          typeof p === 'string' ? p : p.name
+        );
+
+        if (currentPlayers.length > 0) {
+          playerPreview.innerHTML = currentPlayers.slice(0, 6).map((name, i) => `
             <span class="player-tag" style="animation-delay:${i * 0.05}s">
-              <img class="avatar" src="https://mc-heads.net/avatar/${name}/22" alt="${name}"
-                   onerror="this.style.display='none'">
+              <img class="avatar" src="https://mc-heads.net/avatar/${name}/22"
+                   alt="${name}" onerror="this.style.display='none'">
               ${name}
             </span>
-          `).join('');
+          `).join('') + (currentPlayers.length > 6
+            ? `<span class="player-tag" style="cursor:pointer;" onclick="openPlayerModal()">
+                 +${currentPlayers.length - 6} نفر دیگر
+               </span>`
+            : '');
         } else {
-          playerList.innerHTML = '<span class="loading">هیچ پلیری در حال حاضر آنلاین نیست</span>';
+          playerPreview.innerHTML = '<span class="loading">هیچ پلیری آنلاین نیست</span>';
+        }
+
+        if (document.getElementById('playerModal').classList.contains('active')) {
+          renderModalPlayers();
         }
       } else {
         dot.classList.add('off');
         statusText.textContent = 'آفلاین';
         playerCount.textContent = 'سرور آفلاین است';
         playerTotal.textContent = '—';
-        playerList.innerHTML = '<span class="loading">سرور در حال حاضر آفلاین است</span>';
+        currentPlayers = [];
+        playerPreview.innerHTML = '<span class="loading">سرور آفلاین است</span>';
       }
     } catch (err) {
       document.getElementById('statusText').textContent = 'نامشخص';
       document.getElementById('statusDot').classList.add('off');
-      document.getElementById('playerList').innerHTML =
-        '<span class="loading">امکان دریافت اطلاعات وجود ندارد</span>';
+      document.getElementById('playerPreview').innerHTML =
+        '<span class="loading">امکان دریافت اطلاعات نیست</span>';
     }
   }
 
@@ -601,4 +743,4 @@
 </script>
 
 </body>
-  </html>
+       </html>
