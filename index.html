@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AyShinEV | سرور ماینکرفت</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --white: #ffffff;
+    --black: #0a0a0a;
+    --gray: #1a1a1a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ===== پس‌زمینه انیمیشنی ===== */
+  .bg-anim {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+  .bg-anim::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%);
+    top: -200px; left: -150px;
+    animation: float1 18s ease-in-out infinite;
+  }
+  .bg-anim::after {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.07), transparent 70%);
+    bottom: -150px; right: -100px;
+    animation: float2 22s ease-in-out infinite;
+  }
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at 50% 30%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 20%, transparent 75%);
+  }
+
+  @keyframes float1 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(120px, 80px) scale(1.2); }
+  }
+  @keyframes float2 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-100px, -60px) scale(1.15); }
+  }
+
+  /* ===== ذرات شناور ===== */
+  .particles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: rise linear infinite;
+  }
+  @keyframes rise {
+    0% { opacity: 0; transform: translateY(0) scale(0.5); }
+    10% { opacity: .8; }
+    90% { opacity: .6; }
+    100% { opacity: 0; transform: translateY(-100vh) scale(1.2); }
+  }
+
+  /* ===== Header ===== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+    background: rgba(10,10,10,0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    z-index: 100;
+    animation: slideDown .8s ease;
+  }
+  @keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .logo {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #fff, #888, #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+  }
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+
+  nav a {
+    color: #ccc;
+    text-decoration: none;
+    margin: 0 14px;
+    font-weight: 400;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color .3s;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; right: 0;
+    width: 0; height: 2px;
+    background: #fff;
+    transition: width .3s;
+  }
+  nav a:hover { color: #fff; }
+  nav a:hover::after { width: 100%; }
+
+  /* ===== Hero ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 6% 80px;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 8vw, 5.5rem);
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+    background: linear-gradient(120deg, #ffffff 0%, #b0b0b0 40%, #ffffff 60%, #9a9a9a 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 5s linear infinite, fadeUp 1s ease .2s both;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.25));
+  }
+
+  .hero p {
+    color: #aaa;
+    max-width: 600px;
+    font-size: 1.1rem;
+    margin-bottom: 36px;
+    animation: fadeUp 1s ease .5s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* آی‌پی با افکت */
+  .ip-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(26,26,26,0.8);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 14px 24px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all .3s;
+    direction: ltr;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 1s ease .8s both;
+  }
+  .ip-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left .6s;
+  }
+  .ip-box:hover::before { left: 100%; }
+  .ip-box:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 40px rgba(255,255,255,0.2);
+  }
+  .ip-box .copy-icon { font-size: 0.9rem; opacity: .7; }
+
+  /* وضعیت */
+  .status-bar {
+    display: flex;
+    gap: 28px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 1s ease 1.1s both;
+  }
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #bbb;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #2ecc71;
+    box-shadow: 0 0 12px #2ecc71;
+    animation: pulse 1.6s infinite;
+  }
+  .dot.off { background: #e74c3c; box-shadow: 0 0 12px #e74c3c; animation: none; }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .4; transform: scale(1.3); }
+  }
+
+  /* ===== اسکرول انیمیشن ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== Sections ===== */
+  section { padding: 90px 6%; position: relative; }
+
+  .section-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #fff, #999, #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+  }
+  .section-sub {
+    text-align: center;
+    color: #777;
+    margin-bottom: 50px;
+    font-size: 0.95rem;
+  }
+
+  /* ===== گیم‌مودها ===== */
+  .modes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .mode-card {
+    background: linear-gradient(160deg, rgba(30,30,30,0.95), rgba(15,15,15,0.95));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 40px 28px;
+    text-align: center;
+    transition: all .4s cubic-bezier(.2,.8,.2,1);
+    position: relative;
+    overflow: hidden;
+  }
+  .mode-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    padding: 1px;
+    background: linear-gradient(135deg, #fff, transparent, #fff);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity .4s;
+  }
+  .mode-card:hover::before { opacity: .5; }
+  .mode-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+  }
+  .mode-card .icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    transition: transform .4s;
+  }
+  .mode-card:hover .icon { transform: scale(1.15) rotate(-5deg); }
+  .mode-card h3 { font-size: 1.4rem; margin-bottom: 10px; }
+  .mode-card p { color: #999; font-size: 0.95rem; }
+
+  .mode-card.soon {
+    opacity: .6;
+    border-style: dashed;
+  }
+  .badge {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    letter-spacing: 1px;
+    animation: badgePulse 2s infinite;
+  }
+  @keyframes badgePulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
+    50% { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+  }
+
+  /* ===== پلیرها ===== */
+  .players-box {
+    max-width: 800px;
+    margin: 0 auto;
+    background: linear-gradient(160deg, rgba(26,26,26,0.95), rgba(15,15,15,0.95));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 30px;
+  }
+  .players-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .players-header h3 { font-size: 1.1rem; }
+  .players-header .count { font-size: 0.9rem; color: #aaa; }
+  .player-list { display: flex; flex-wrap: wrap; gap: 10px; }
+  .player-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0f0f0f;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: #ddd;
+    direction: ltr;
+    transition: all .3s;
+    animation: popIn .4s ease both;
+  }
+  .player-tag:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-2px);
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .player-tag .avatar {
+    width: 22px; height: 22px;
+    border-radius: 4px;
+    background: #fff;
+  }
+  .loading { color: #777; font-size: 0.95rem; }
+
+  /* ===== فوتر ===== */
+  footer {
+    text-align: center;
+    padding: 40px 6%;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: #666;
+    font-size: 0.85rem;
+  }
+  footer strong {
+    background: linear-gradient(90deg, #fff, #888, #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+  }
+
+  @media (max-width: 600px) {
+    nav a { margin: 0 8px; font-size: 0.85rem; }
+    .logo { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- پس‌زمینه انیمیشنی -->
+<div class="bg-anim"></div>
+<div class="bg-grid"></div>
+<div class="particles" id="particles"></div>
+
+<header>
+  <div class="logo">AYSHINEV</div>
+  <nav>
+    <a href="#modes">گیم‌مودها</a>
+    <a href="#players">پلیرها</a>
+    <a href="#connect">اتصال</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>AYSHINEV</h1>
+  <p>سرور ماینکرفت فارسی — دنیایی تازه برای ساختن، ماجراجویی و رقابت</p>
+
+  <div class="ip-box" onclick="copyIP()" title="کلیک کنید تا کپی شود">
+    <span>ayshinev.new.tg</span>
+    <span class="copy-icon" id="copyIcon">📋</span>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-item">
+      <span class="dot" id="statusDot"></span>
+      <span id="statusText">در حال بررسی وضعیت...</span>
+    </div>
+    <div class="status-item">
+      <span>👥</span>
+      <span id="playerCount">— پلیر آنلاین</span>
+    </div>
+  </div>
+</div>
+
+<!-- گیم‌مودها -->
+<section id="modes">
+  <h2 class="section-title reveal">گیم‌مودها</h2>
+  <p class="section-sub reveal">حالت‌های موجود در سرور AyShinEV</p>
+
+  <div class="modes">
+    <div class="mode-card reveal">
+      <div class="icon">⛏️</div>
+      <h3>Survival</h3>
+      <p>سروایول کلاسیک با اقتصادی پویا، محافظت از زمین و گیم‌پلی متعادل</p>
+    </div>
+
+    <div class="mode-card soon reveal">
+      <div class="icon">🎮</div>
+      <h3>Mini Games</h3>
+      <p>مجموعه‌ای از مینی‌گیم‌های هیجان‌انگیز — در حال ساخت</p>
+      <span class="badge">به‌زودی</span>
+    </div>
+  </div>
+</section>
+
+<!-- پلیرها -->
+<section id="players">
+  <h2 class="section-title reveal">پلیرهای آنلاین</h2>
+  <p class="section-sub reveal">لیست بازیکنان متصل به سرور</p>
+
+  <div class="players-box reveal">
+    <div class="players-header">
+      <h3>👥 لیست پلیرها</h3>
+      <span class="count" id="playerTotal">—</span>
+    </div>
+    <div class="player-list" id="playerList">
+      <span class="loading">در حال دریافت لیست پلیرها...</span>
+    </div>
+  </div>
+</section>
+
+<!-- اتصال -->
+<section id="connect">
+  <h2 class="section-title reveal">اتصال به سرور</h2>
+  <p class="section-sub reveal">آی‌پی زیر را در ماینکرفت خود وارد کنید</p>
+  <div style="text-align:center;" class="reveal">
+    <div class="ip-box" onclick="copyIP()" style="display:inline-flex;">
+      <span>ayshinev.new.tg</span>
+      <span class="copy-icon">📋</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  ساخته شده برای سرور <strong>AyShinEV</strong> — تمامی حقوق محفوظ است
+</footer>
+
+<script>
+  const SERVER_IP = "ayshinev.new.tg";
+
+  /* ===== ذرات شناور ===== */
+  const particlesEl = document.getElementById('particles');
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = '-10px';
+    p.style.animationDuration = (8 + Math.random() * 10) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+    particlesEl.appendChild(p);
+  }
+
+  /* ===== کپی آی‌پی ===== */
+  function copyIP() {
+    navigator.clipboard.writeText(SERVER_IP).then(() => {
+      const icon = document.getElementById('copyIcon');
+      if (icon) { icon.textContent = '✅'; setTimeout(() => icon.textContent = '📋', 1500); }
+    });
+  }
+
+  /* ===== اسکرول انیمیشن ===== */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ===== وضعیت سرور ===== */
+  async function fetchStatus() {
+    try {
+      const res = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
+      const data = await res.json();
+
+      const dot = document.getElementById('statusDot');
+      const statusText = document.getElementById('statusText');
+      const playerCount = document.getElementById('playerCount');
+      const playerTotal = document.getElementById('playerTotal');
+      const playerList = document.getElementById('playerList');
+
+      if (data.online) {
+        dot.classList.remove('off');
+        statusText.textContent = 'آنلاین';
+        const online = data.players?.online ?? 0;
+        const max = data.players?.max ?? 0;
+        playerCount.textContent = `${online} پلیر آنلاین`;
+        playerTotal.textContent = `${online} / ${max}`;
+
+        if (data.players?.list && data.players.list.length > 0) {
+          playerList.innerHTML = data.players.list.map((name, i) => `
+            <span class="player-tag" style="animation-delay:${i * 0.05}s">
+              <img class="avatar" src="https://mc-heads.net/avatar/${name}/22" alt="${name}"
+                   onerror="this.style.display='none'">
+              ${name}
+            </span>
+          `).join('');
+        } else {
+          playerList.innerHTML = '<span class="loading">هیچ پلیری در حال حاضر آنلاین نیست</span>';
+        }
+      } else {
+        dot.classList.add('off');
+        statusText.textContent = 'آفلاین';
+        playerCount.textContent = 'سرور آفلاین است';
+        playerTotal.textContent = '—';
+        playerList.innerHTML = '<span class="loading">سرور در حال حاضر آفلاین است</span>';
+      }
+    } catch (err) {
+      document.getElementById('statusText').textContent = 'نامشخص';
+      document.getElementById('statusDot').classList.add('off');
+      document.getElementById('playerList').innerHTML =
+        '<span class="loading">امکان دریافت اطلاعات وجود ندارد</span>';
+    }
+  }
+
+  fetchStatus();
+  setInterval(fetchStatus, 60000);
+</script>
+
+</body>
+  </html>
