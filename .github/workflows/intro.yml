@@ -1,0 +1,42 @@
+name: Send AyShinEV Intro to Telegram
+
+on:
+  workflow_dispatch:  # اجرای دستی از تب Actions
+
+jobs:
+  send-intro:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Intro Message
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TG_TOKEN_BOT }}
+          to: ${{ secrets.ID }}
+          parse-mode: html
+          message: |
+            🎮 <b>به سرور AyShinEV خوش اومدید!</b> 🎮
+
+            ⛏️ یه دنیای تازه برای ساختن، ماجراجویی و رقابت!
+            از سروایول کلاسیک تا مینی‌گیم‌های هیجان‌انگیز (به‌زودی 🎯)
+
+            ━━━━━━━━━━━━━━━━━━
+
+            🌐 <b>آی‌پی سرور:</b>
+            <code>ayshinev.new.tg</code>
+
+            📌 برای اتصال، آی‌پی بالا رو توی ماینکرفت خودتون وارد کنید.
+
+            ━━━━━━━━━━━━━━━━━━
+
+            🎯 <b>گیم‌مودها:</b>
+            ⛏️ <b>Survival</b> — سروایول با اقتصادی پویا
+            🎮 <b>Mini Games</b> — به‌زودی...
+
+            ━━━━━━━━━━━━━━━━━━
+
+            👑 <b>مدیریت:</b>
+            👤 Owner: <b>AyshinEV</b>
+
+            ━━━━━━━━━━━━━━━━━━
+
+            💙 منتظرتون هستیم، بیاید بسازیم!
