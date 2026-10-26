@@ -1,7 +1,7 @@
 name: Send AyShinEV Intro to Telegram
 
 on:
-  workflow_dispatch:  # اجرای دستی از تب Actions
+  workflow_dispatch:
 
 jobs:
   send-intro:
